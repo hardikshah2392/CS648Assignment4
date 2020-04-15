@@ -26,7 +26,7 @@ async function getNextSequence(name) {
 }
 
 async function addProd(_, { prods }) {
-  const newProd = { prods };
+  const newProd = { ...prods };
   newProd.id = await getNextSequence('products');
   const result = await db.collection('products').insertOne(newProd);
   const savedProd = await db.collection('products').findOne({ _id: result.insertedId });
